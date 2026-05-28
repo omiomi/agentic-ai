@@ -238,11 +238,14 @@ FINANCIAL_AUTOMATION_ROOT=~/projects/agentic-ai/financial-automation
 完成后确认该行已写入文件。
 ```
 
-### 7.4 验证 Skill 是否生效
+### 7.4 验证 Skill 是否生效（发给龙虾）
 
-在飞书 DM 中直接发送一张 PDF 发票（如仓库自带的 `hotel_invoice.pdf`）给龙虾，观察它是否自动触发 `financial-expense-automation` Skill 并走完识别 → 写表的完整链路。
+```
+请帮我报销这张票据：
+~/projects/agentic-ai/financial-automation/runtime/sample_run_input/icic_invoice.pdf
+```
 
-> 这是比 `/skills list` 更直接的验证方式。如果触发成功并完成写表，第 7 步即完成。
+> 如果 Skill 注册成功，龙虾应自动触发 `financial-expense-automation`，走完识别 → 写表 → 回读的完整链路。写表成功即完成第 7 步。
 
 ---
 
