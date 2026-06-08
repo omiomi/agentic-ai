@@ -58,7 +58,7 @@ def detect_step(stdout: str, stderr: str, returncode: int) -> str:
 
 
 def main() -> int:
-    cmd = [sys.executable, 'scripts/run_daily_pipeline.py', '--results-dir', 'runtime_results']
+    cmd = [sys.executable, 'scripts/run_daily_pipeline.py']
     completed = subprocess.run(cmd, cwd=str(PROJECT_ROOT), text=True, capture_output=True)
 
     stdout = completed.stdout.strip()
