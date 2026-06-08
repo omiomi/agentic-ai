@@ -211,3 +211,5 @@ __marimo__/
 
 .DS_Store
 *code-workspace
+# Morning Newspaper runtime result files
+morning-newspaper/runtime_results/
