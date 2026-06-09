@@ -48,6 +48,8 @@ def main() -> None:
     if not isinstance(items, list) or not isinstance(ranked_titles, list):
         raise SystemExit("invalid input format")
 
+    selected_map = {str(t).strip(): idx for idx, t in enumerate(ranked_titles, 1) if str(t).strip()}
+
     shortlist: List[Dict[str, Any]] = []
     seen_titles: set[str] = set()
     for item in items:

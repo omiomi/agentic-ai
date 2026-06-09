@@ -234,8 +234,21 @@ def _enforce_source_diversity(
             additions.append(item)
             used_urls.add(str(item.get("url", "")).strip())
 
-    # 组装最终列表：非 Tavily 原有 + 补入的 GitHub/HN + 限额内的 Tavily
+    # 补满到原始数量：从候选池中按优先级填充空位
     merged_raw = non_tavily_items + additions + kept_tavily
+    shortfall = total - len(merged_raw)
+    if shortfall > 0:
+        fill_pool = [
+            item for item in all_drafted
+            if isinstance(item, dict)
+            and str(item.get("url", "")).strip() not in used_urls
+        ]
+        non_tavily_fill = [r for r in fill_pool if str(r.get("source_type", "")).strip() not in TAVILY_TYPES]
+        tavily_fill = [r for r in fill_pool if str(r.get("source_type", "")).strip() in TAVILY_TYPES]
+        fill_ordered = non_tavily_fill + tavily_fill
+        for item in fill_ordered[:shortfall]:
+            merged_raw.append(item)
+            used_urls.add(str(item.get("url", "")).strip())
     # 重新编号 rank
     merged_raw.sort(key=lambda r: int(r.get("rank", 10**9)))
     result: List[Dict[str, Any]] = []
